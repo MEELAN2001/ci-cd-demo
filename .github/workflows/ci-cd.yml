@@ -1,9 +1,11 @@
-name: CI/CD Demo
+name: CI/CD Demo Advanced
 
-#learning ci/cd with github actions
-# Trigger workflow on push to main branch
+# Trigger workflow on push or pull request to main branch
 on:
   push:
+    branches:
+      - main
+  pull_request:
     branches:
       - main
 
@@ -12,8 +14,25 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Step 1: Checkout code
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Print message
-        run: echo "CI/CD WORK HAS BEEN Started SUCCESSFULLY"
+      # Step 2: Print CI/CD started message
+      - name: Print start message
+        run: |
+          echo "CI/CD Started"
+          echo "Branch: ${{ github.ref_name }}"
+          echo "Run triggered by: ${{ github.actor }}"
+          echo "Date & Time: $(date)"
+          
+      # Step 3: Simulate a build/test (optional)
+      - name: Simulate build
+        run: |
+          echo "Running build..."
+          sleep 2
+          echo "Build successful!"
+
+      # Step 4: Success message
+      - name: Final success
+        run: echo "CI/CD pipeline completed successfully ✅"
