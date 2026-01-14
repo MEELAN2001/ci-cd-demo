@@ -3,10 +3,10 @@ name: CI/CD Demo with Tests
 on:
   push:
     branches:
-      - main
+      - "**"
   pull_request:
     branches:
-      - main
+      - "**"
 
 jobs:
   build-and-test:
